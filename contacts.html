@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>WhopperCRM | Local Contacts</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #f4f9ff; color: #0a2b3e; scroll-behavior: smooth; display: flex; min-height: 100vh; }
+    :root {
+      --primary-deep: #0a5c8e;
+      --primary-bright: #1e88e5;
+      --primary-light: #e3f2fd;
+      --za-green: #007a4d;
+      --pure-white: #ffffff;
+      --soft-white: #fefefe;
+      --gray-light: #f0f4f8;
+      --text-dark: #0a2b3e;
+      --text-muted: #2c4b66;
+      --border-light: #cbdde9;
+      --shadow-sm: 0 8px 20px rgba(0, 20, 50, 0.05);
+      --shadow-md: 0 12px 28px rgba(0, 30, 60, 0.08);
+    }
+
+    /* Sidebar Navigation (Reused) */
+    .sidebar { width: 260px; background: var(--pure-white); border-right: 1px solid var(--border-light); display: flex; flex-direction: column; position: sticky; top: 0; height: 100vh; z-index: 100; }
+    .sidebar-header { padding: 2rem; display: flex; align-items: center; gap: 12px; }
+    .sidebar-header i { font-size: 1.8rem; color: var(--za-green); background: var(--primary-light); padding: 8px; border-radius: 12px; }
+    .sidebar-header h1 { font-size: 1.4rem; font-weight: 700; background: linear-gradient(135deg, var(--za-green), var(--primary-bright)); background-clip: text; -webkit-background-clip: text; color: transparent; }
+    .sidebar-nav { flex: 1; padding: 0 1rem; }
+    .nav-item { display: flex; align-items: center; gap: 12px; padding: 0.8rem 1rem; text-decoration: none; color: var(--text-muted); font-weight: 500; border-radius: 12px; transition: 0.2s; margin-bottom: 0.5rem; }
+    .nav-item:hover, .nav-item.active { background: var(--primary-light); color: var(--za-green); }
+    .nav-item i { font-size: 1.1rem; }
+
+    /* Main Content */
+    .main-content { flex: 1; padding: 2rem; overflow-y: auto; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+    .header h2 { font-size: 1.8rem; font-weight: 700; }
+
+    .btn { padding: 0.8rem 1.5rem; border-radius: 12px; font-weight: 600; cursor: pointer; transition: 0.2s; border: none; display: flex; align-items: center; gap: 8px; text-decoration: none; font-size: 0.9rem; }
+    .btn-primary { background: var(--za-green); color: white; }
+    .btn-outline { background: white; border: 1px solid var(--border-light); color: var(--text-dark); }
+
+    /* Contacts Layout */
+    .contacts-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+    .contact-card { background: var(--pure-white); padding: 1.5rem; border-radius: 24px; box-shadow: var(--shadow-sm); border: 1px solid var(--border-light); text-align: center; transition: 0.2s; position: relative; }
+    .contact-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: var(--za-green); }
+    .contact-avatar { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin-bottom: 1rem; border: 3px solid var(--primary-light); }
+    .contact-name { font-size: 1.1rem; font-weight: 700; color: var(--text-dark); margin-bottom: 0.3rem; }
+    .contact-title { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem; }
+    .contact-company { font-size: 0.9rem; font-weight: 600; color: var(--za-green); background: #e8f5e9; padding: 4px 12px; border-radius: 20px; display: inline-block; margin-bottom: 1.2rem; }
+    .contact-actions { display: flex; justify-content: center; gap: 1rem; padding-top: 1.2rem; border-top: 1px solid var(--gray-light); }
+    .contact-action-btn { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--gray-light); color: var(--text-muted); text-decoration: none; transition: 0.2s; }
+    .contact-action-btn:hover { background: var(--za-green); color: white; }
+
+    .search-bar { margin-bottom: 2rem; display: flex; gap: 1rem; align-items: center; }
+    .search-input { flex: 1; padding: 0.8rem 1rem; border-radius: 12px; border: 1px solid var(--border-light); outline: none; }
+  </style>
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <i class="fas fa-hand-holding-heart"></i>
+    <h1>WhopperCRM</h1>
+  </div>
+  <nav class="sidebar-nav">
+    <a href="dashboard.html" class="nav-item"><i class="fas fa-chart-pie"></i> Dashboard</a>
+    <a href="customers.html" class="nav-item"><i class="fas fa-users"></i> Customers</a>
+    <a href="deals.html" class="nav-item"><i class="fas fa-handshake"></i> Deals</a>
+    <a href="tasks.html" class="nav-item"><i class="fas fa-tasks"></i> Tasks</a>
+    <a href="contacts.html" class="nav-item active"><i class="fas fa-address-book"></i> Contacts</a>
+    <a href="reports.html" class="nav-item"><i class="fas fa-chart-line"></i> Reports</a>
+    <div style="margin-top: 2rem; padding: 0 1rem; font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">Account</div>
+    <a href="profile.html" class="nav-item"><i class="fas fa-user-circle"></i> Profile</a>
+    <a href="settings.html" class="nav-item"><i class="fas fa-cog"></i> Settings</a>
+    <a href="login.html" class="nav-item"><i class="fas fa-sign-out-alt"></i> Logout</a>
+  </nav>
+</aside>
+
+<main class="main-content">
+  <header class="header">
+    <h2>Local Contacts</h2>
+    <button class="btn btn-primary"><i class="fas fa-plus"></i> New Mzansi Contact</button>
+  </header>
+
+  <div class="search-bar">
+    <div style="position: relative; flex: 1;">
+      <i class="fas fa-search" style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--text-muted);"></i>
+      <input type="text" class="search-input" placeholder="Search contacts in ZA..." style="padding-left: 2.8rem;">
+    </div>
+    <button class="btn btn-outline"><i class="fas fa-filter"></i> Sort</button>
+  </div>
+
+  <div class="contacts-grid">
+    <div class="contact-card">
+      <img src="https://i.pravatar.cc/150?u=thabo" alt="Contact" class="contact-avatar">
+      <h3 class="contact-name">Thabo Mbeki</h3>
+      <p class="contact-title">Lead Architect</p>
+      <span class="contact-company">Jozi Hub Tech</span>
+      <div class="contact-actions">
+        <a href="#" class="contact-action-btn"><i class="fab fa-whatsapp"></i></a>
+        <a href="#" class="contact-action-btn"><i class="fas fa-phone"></i></a>
+        <a href="#" class="contact-action-btn"><i class="fas fa-envelope"></i></a>
+        <a href="customer-detail.html" class="contact-action-btn"><i class="fas fa-user"></i></a>
+      </div>
+    </div>
+
+    <div class="contact-card">
+      <img src="https://i.pravatar.cc/150?u=lerato" alt="Contact" class="contact-avatar">
+      <h3 class="contact-name">Lerato Nkosi</h3>
+      <p class="contact-title">Operations Manager</p>
+      <span class="contact-company">Mzansi Apparel</span>
+      <div class="contact-actions">
+        <a href="#" class="contact-action-btn"><i class="fab fa-whatsapp"></i></a>
+        <a href="#" class="contact-action-btn"><i class="fas fa-phone"></i></a>
+        <a href="#" class="contact-action-btn"><i class="fas fa-envelope"></i></a>
+        <a href="customer-detail.html" class="contact-action-btn"><i class="fas fa-user"></i></a>
+      </div>
+    </div>
+
+    <div class="contact-card">
+      <img src="https://i.pravatar.cc/150?u=sipho" alt="Contact" class="contact-avatar">
+      <h3 class="contact-name">Sipho Khumalo</h3>
+      <p class="contact-title">Project Director</p>
+      <span class="contact-company">Cape Town Creatives</span>
+      <div class="contact-actions">
+        <a href="#" class="contact-action-btn"><i class="fab fa-whatsapp"></i></a>
+        <a href="#" class="contact-action-btn"><i class="fas fa-phone"></i></a>
+        <a href="#" class="contact-action-btn"><i class="fas fa-envelope"></i></a>
+        <a href="customer-detail.html" class="contact-action-btn"><i class="fas fa-user"></i></a>
+      </div>
+    </div>
+
+    <div class="contact-card">
+      <img src="https://i.pravatar.cc/150?u=nomsa" alt="Contact" class="contact-avatar">
+      <h3 class="contact-name">Nomsa Dlamini</h3>
+      <p class="contact-title">Supply Chain Lead</p>
+      <span class="contact-company">Pretoria Logistics</span>
+      <div class="contact-actions">
+        <a href="#" class="contact-action-btn"><i class="fab fa-whatsapp"></i></a>
+        <a href="#" class="contact-action-btn"><i class="fas fa-phone"></i></a>
+        <a href="#" class="contact-action-btn"><i class="fas fa-envelope"></i></a>
+        <a href="customer-detail.html" class="contact-action-btn"><i class="fas fa-user"></i></a>
+      </div>
+    </div>
+  </div>
+</main>
+
+</body>
+</html>

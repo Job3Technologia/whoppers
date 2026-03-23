@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en-ZA">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Admin | Hopper CRM</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">Admin • Hopper CRM</div>
+      <nav class="menu">
+        <a href="index.html">Home</a>
+        <a href="customers.html">Customers</a>
+        <a href="admin.html" class="active">Admin</a>
+      </nav>
+    </div>
+  </header>
+  <main class="container section">
+    <div id="login" class="card" style="max-width:420px">
+      <h3>Admin Login</h3>
+      <input id="admin-user" class="search" placeholder="Username" style="margin:6px 0">
+      <input id="admin-pass" type="password" class="search" placeholder="Password" style="margin:6px 0">
+      <button id="login-btn" class="btn">Login</button>
+      <div class="muted" style="margin-top:6px">Use admin / password</div>
+    </div>
+    <div id="panel">
+      <div style="display:flex;gap:8px;margin-bottom:10px">
+        <button id="nav-products" class="btn">Products</button>
+        <button id="nav-customers" class="btn secondary">Customers</button>
+        <button id="nav-orders" class="btn secondary">Orders</button>
+        <div style="flex:1"></div>
+        <button id="export-json" class="btn">Export JSON</button>
+        <button id="export-csvs" class="btn secondary">Export CSVs</button>
+        <button id="reset" class="btn danger">Reset Data</button>
+      </div>
+      <div id="tab-products" class="card">
+        <h3>Products</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:8px;margin:8px 0">
+          <input id="prod-name" class="search" placeholder="Name">
+          <input id="prod-cat" class="search" placeholder="Category">
+          <input id="prod-price" class="search" placeholder="Price (R)">
+          <button id="add-product" class="btn">Add</button>
+        </div>
+        <table class="table">
+          <thead><tr><th>Name</th><th>Category</th><th>Price</th><th></th></tr></thead>
+          <tbody id="products-body"></tbody>
+        </table>
+      </div>
+      <div id="tab-customers" class="card" style="display:none">
+        <h3>Customers</h3>
+        <table class="table">
+          <thead><tr><th>Name</th><th>Email</th><th>Tier</th><th>Payment</th><th></th></tr></thead>
+          <tbody id="customers-body"></tbody>
+        </table>
+      </div>
+      <div id="tab-orders" class="card" style="display:none">
+        <h3>Orders</h3>
+        <table class="table">
+          <thead><tr><th>Order</th><th>Customer</th><th>Items</th><th>Total</th><th>Status</th></tr></thead>
+          <tbody id="orders-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <div class="container">Durban • KwaZulu‑Natal</div>
+  </footer>
+  <script src="js/ui.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

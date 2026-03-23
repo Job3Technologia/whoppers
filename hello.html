@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>PrismaPrint | Modern Print Shop</title>
+  <!-- Google Fonts: clean sans-serif & subtle headings -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 (free icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f4f9ff;   /* very light blue-white background */
+      color: #0a2b3e;
+      scroll-behavior: smooth;
+    }
+
+    /* ========== BLUE & WHITE THEME ========== */
+    :root {
+      --primary-deep: #0a5c8e;
+      --primary-bright: #1e88e5;
+      --primary-light: #e3f2fd;
+      --accent-glow: #3ea6ff;
+      --pure-white: #ffffff;
+      --soft-white: #fefefe;
+      --gray-light: #f0f4f8;
+      --text-dark: #0a2b3e;
+      --text-muted: #2c4b66;
+      --border-light: #cbdde9;
+      --shadow-sm: 0 8px 20px rgba(0, 20, 50, 0.05);
+      --shadow-md: 0 12px 28px rgba(0, 30, 60, 0.08);
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* HEADER & NAVIGATION */
+    .navbar {
+      background: var(--pure-white);
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(0px);
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      padding: 1rem 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo i {
+      font-size: 2rem;
+      color: var(--primary-bright);
+      background: var(--primary-light);
+      padding: 8px;
+      border-radius: 18px;
+    }
+
+    .logo h1 {
+      font-size: 1.7rem;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      background: linear-gradient(135deg, #0a5c8e, #1e88e5);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 500;
+      color: var(--text-dark);
+      transition: 0.2s;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-links a i {
+      font-size: 0.9rem;
+      color: var(--primary-bright);
+    }
+
+    .nav-links a:hover {
+      color: var(--primary-bright);
+    }
+
+    .btn-outline-light {
+      background: transparent;
+      border: 1.5px solid var(--primary-bright);
+      padding: 0.5rem 1.2rem;
+      border-radius: 40px;
+      font-weight: 600;
+      color: var(--primary-bright);
+      transition: 0.2s;
+    }
+
+    .btn-outline-light:hover {
+      background: var(--primary-bright);
+      color: white;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      background: linear-gradient(105deg, #ffffff 0%, #eef6fe 100%);
+      padding: 3.5rem 0 4rem;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .hero-grid {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: space-between;
+    }
+
+    .hero-text {
+      flex: 1;
+    }
+
+    .hero-text h2 {
+      font-size: 3rem;
+      font-weight: 800;
+      line-height: 1.2;
+      color: var(--text-dark);
+      margin-bottom: 1rem;
+    }
+
+    .hero-text .highlight {
+      color: var(--primary-bright);
+      border-bottom: 3px solid var(--primary-bright);
+      display: inline-block;
+    }
+
+    .hero-text p {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      margin: 1.2rem 0 2rem;
+      max-width: 90%;
+    }
+
+    .btn-primary {
+      background: var(--primary-bright);
+      color: white;
+      border: none;
+      padding: 0.85rem 2rem;
+      border-radius: 60px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 4px 8px rgba(30,136,229,0.2);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-primary i {
+      font-size: 1rem;
+    }
+
+    .btn-primary:hover {
+      background: #0a5c8e;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(30,136,229,0.25);
+    }
+
+    .hero-visual {
+      flex: 1;
+      background: var(--pure-white);
+      border-radius: 48px;
+      padding: 1rem;
+      box-shadow: var(--shadow-md);
+      text-align: center;
+      border: 1px solid rgba(30,136,229,0.2);
+    }
+
+    .hero-visual i {
+      font-size: 8rem;
+      color: var(--primary-bright);
+      background: var(--primary-light);
+      padding: 1.5rem;
+      border-radius: 60px;
+    }
+
+    /* SERVICES SECTION (cards) */
+    .section {
+      padding: 4rem 0;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.3rem;
+      font-weight: 700;
+      margin-bottom: 2.5rem;
+      color: var(--text-dark);
+    }
+
+    .section-title span {
+      background: var(--primary-light);
+      padding: 0 0.3rem;
+      color: var(--primary-deep);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+    }
+
+    .service-card {
+      background: var(--pure-white);
+      border-radius: 32px;
+      padding: 2rem 1.8rem;
+      text-align: center;
+      transition: all 0.25s ease;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-light);
+    }
+
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--primary-bright);
+    }
+
+    .service-icon {
+      background: var(--primary-light);
+      width: 80px;
+      height: 80px;
+      line-height: 80px;
+      border-radius: 40px;
+      margin: 0 auto 1.5rem;
+      font-size: 2.4rem;
+      color: var(--primary-bright);
+    }
+
+    .service-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .service-card p {
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* GALLERY / SHOWCASE LAYOUT */
+    .showcase {
+      background: var(--gray-light);
+    }
+
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.8rem;
+      justify-content: center;
+    }
+
+    .print-item {
+      background: white;
+      border-radius: 28px;
+      width: 260px;
+      padding: 1.5rem 1rem 1.8rem;
+      text-align: center;
+      transition: all 0.2s;
+      box-shadow: 0 5px 12px rgba(0,0,0,0.02);
+      border: 1px solid #dce9f2;
+    }
+
+    .print-item i {
+      font-size: 3.5rem;
+      color: var(--primary-bright);
+      background: var(--primary-light);
+      padding: 1rem;
+      border-radius: 50px;
+      margin-bottom: 1rem;
+    }
+
+    .print-item h4 {
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+
+    .price-tag {
+      font-weight: 700;
+      color: var(--primary-deep);
+      margin-top: 0.75rem;
+      font-size: 1.2rem;
+    }
+
+    /* QUOTE FORM (blue/white clean) */
+    .quote-section {
+      background: var(--pure-white);
+      border-radius: 48px;
+      margin: 2rem auto 3rem;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-light);
+      overflow: hidden;
+    }
+
+    .quote-flex {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .quote-info {
+      background: var(--primary-light);
+      padding: 2.5rem;
+      flex: 1;
+    }
+
+    .quote-info h3 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary-deep);
+    }
+
+    .quote-info p {
+      margin: 1rem 0 1.8rem;
+      color: #1e4e6e;
+    }
+
+    .quote-form {
+      flex: 1.2;
+      padding: 2rem 2.2rem;
+      background: white;
+    }
+
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%;
+      padding: 0.9rem 1rem;
+      border-radius: 28px;
+      border: 1px solid var(--border-light);
+      font-family: 'Inter', sans-serif;
+      background: #fefefe;
+      transition: 0.2s;
+    }
+
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary-bright);
+      box-shadow: 0 0 0 3px rgba(30,136,229,0.2);
+    }
+
+    .btn-submit {
+      background: var(--primary-bright);
+      border: none;
+      padding: 0.9rem;
+      width: 100%;
+      border-radius: 40px;
+      font-weight: 700;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .btn-submit:hover {
+      background: #0a5c8e;
+    }
+
+    /* TESTIMONIALS */
+    .testimonial-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+
+    .testimonial {
+      background: white;
+      border-radius: 28px;
+      padding: 1.8rem;
+      width: 300px;
+      box-shadow: var(--shadow-sm);
+      border-left: 5px solid var(--primary-bright);
+    }
+
+    .testimonial i.fa-quote-left {
+      color: var(--primary-light);
+      font-size: 1.6rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .testimonial p {
+      font-style: italic;
+      margin: 0.8rem 0;
+      color: #2c4b66;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #0a2b3e;
+      color: #cbdde9;
+      padding: 2.5rem 0 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .footer-content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+    .footer-col h4 {
+      color: white;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .footer-col p, .footer-col a {
+      color: #bdd4e4;
+      text-decoration: none;
+      line-height: 1.7;
+    }
+
+    .social-icons i {
+      font-size: 1.5rem;
+      margin-right: 1rem;
+      color: var(--primary-bright);
+      transition: 0.2s;
+    }
+
+    .copyright {
+      text-align: center;
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid #1e4e6e;
+      font-size: 0.85rem;
+    }
+
+    /* responsiveness */
+    @media (max-width: 800px) {
+      .nav-container {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .hero-text p {
+        max-width: 100%;
+      }
+      .hero-grid {
+        flex-direction: column-reverse;
+      }
+      .quote-flex {
+        flex-direction: column;
+      }
+      .container {
+        padding: 0 1.2rem;
+      }
+    }
+
+    button, a {
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="logo">
+      <i class="fas fa-print"></i>
+      <h1>PrismaPrint</h1>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
+      <li><a href="#services"><i class="fas fa-palette"></i> Services</a></li>
+      <li><a href="#showcase"><i class="fas fa-images"></i> Gallery</a></li>
+      <li><a href="#quote"><i class="fas fa-file-invoice-dollar"></i> Get Quote</a></li>
+    </ul>
+    <a href="#quote" class="btn-outline-light"><i class="fas fa-tachometer-alt"></i> Order now</a>
+  </div>
+</nav>
+
+<main>
+  <!-- Hero / Home section -->
+  <section id="home" class="hero">
+    <div class="container hero-grid">
+      <div class="hero-text">
+        <h2>Precision printing <br> <span class="highlight">with a personal touch</span></h2>
+        <p>From business cards to large-format banners, PrismaPrint delivers vibrant, fast, and eco-friendly print solutions. Blue-ribbon quality, crystal clarity.</p>
+        <button class="btn-primary" onclick="document.getElementById('quote').scrollIntoView({behavior:'smooth'});"><i class="fas fa-calculator"></i> Request a quote</button>
+      </div>
+      <div class="hero-visual">
+        <i class="fas fa-scroll"></i>
+        <p style="margin-top: 1rem; font-weight: 500;">✨ Premium finishing & fast turnaround</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services section -->
+  <section id="services" class="section">
+    <div class="container">
+      <h2 class="section-title">Our <span>blue-ink</span> specialties</h2>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-id-card"></i></div>
+          <h3>Business essentials</h3>
+          <p>Letterheads, business cards, envelopes — professional stationery that stands out.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-chalkboard"></i></div>
+          <h3>Large format</h3>
+          <p>Banners, posters, and trade show graphics with vivid color accuracy.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-tshirt"></i></div>
+          <h3>Garment & merch</h3>
+          <p>Custom apparel, tote bags, and promo products — dye-sublimation & screen print.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-book"></i></div>
+          <h3>Booklets & binding</h3>
+          <p>Perfect bound, spiral, saddle stitch — catalogues and presentation folders.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery / Showcase (blue & white product layout) -->
+  <section id="showcase" class="section showcase">
+    <div class="container">
+      <h2 class="section-title">Trending <span>print styles</span></h2>
+      <div class="gallery">
+        <div class="print-item">
+          <i class="fas fa-id-card"></i>
+          <h4>Premium Business Cards</h4>
+          <p>Matte / gloss, raised foil</p>
+          <div class="price-tag">From R 29 / 100 pcs</div>
+        </div>
+        <div class="print-item">
+          <i class="fas fa-leaf"></i>
+          <h4>Eco Flyers</h4>
+          <p>Recycled paper, soy inks</p>
+          <div class="price-tag">R 0.25 / piece</div>
+        </div>
+        <div class="print-item">
+          <i class="fas fa-calendar-alt"></i>
+          <h4>Custom Calendars</h4>
+          <p>Wall & desk, personalized</p>
+          <div class="price-tag">From R 14.99</div>
+        </div>
+        <div class="print-item">
+          <i class="fas fa-paint-roller"></i>
+          <h4>Canvas Prints</h4>
+          <p>Gallery wrap, archival ink</p>
+          <div class="price-tag">From R 39</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quote Form (dynamic interactive) -->
+  <div class="container" id="quote">
+    <div class="quote-section">
+      <div class="quote-flex">
+        <div class="quote-info">
+          <h3><i class="fas fa-calculator"></i> Get a custom quote</h3>
+          <p>Tell us about your print project. Our specialists will craft a tailored proposal within 2 hours (business hours). Blue & white precision guaranteed.</p>
+          <div style="margin-top: 1rem;">
+            <i class="fas fa-check-circle" style="color:#1e88e5;"></i> <span>Fast turnaround</span><br>
+            <i class="fas fa-check-circle" style="color:#1e88e5;"></i> <span>Eco-friendly materials</span><br>
+            <i class="fas fa-check-circle" style="color:#1e88e5;"></i> <span>Free design consultation</span>
+          </div>
+        </div>
+        <div class="quote-form">
+          <form id="printQuoteForm">
+            <div class="form-group">
+              <input type="text" id="fullName" placeholder="Full name *" required>
+            </div>
+            <div class="form-group">
+              <input type="email" id="email" placeholder="Email address *" required>
+            </div>
+            <div class="form-group">
+              <select id="printType" required>
+                <option value="" disabled selected>— Select print type —</option>
+                <option value="Business Cards">Business Cards</option>
+                <option value="Flyers / Brochures">Flyers / Brochures</option>
+                <option value="Banners / Posters">Banners / Posters</option>
+                <option value="Custom Apparel">Custom Apparel</option>
+                <option value="Booklets">Booklets / Catalogs</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <textarea rows="2" id="details" placeholder="Tell us about quantity, size, or special requests..."></textarea>
+            </div>
+            <button type="submit" class="btn-submit"><i class="fas fa-paper-plane"></i> Request instant estimate</button>
+            <p id="formFeedback" style="margin-top: 1rem; font-size: 0.85rem; text-align:center;"></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Testimonials -->
+  <div class="container" style="margin-bottom: 2rem;">
+    <h2 class="section-title">Trusted by <span>creatives & businesses</span></h2>
+    <div class="testimonial-grid">
+      <div class="testimonial">
+        <i class="fas fa-quote-left"></i>
+        <p>"PrismaPrint delivered my wedding invitations with exceptional detail — the blue foil on white was breathtaking."</p>
+        <h4>— Elena M.</h4>
+      </div>
+      <div class="testimonial">
+        <i class="fas fa-quote-left"></i>
+        <p>"Fast, professional, and the quality is unmatched. Our startup's branding materials look premium."</p>
+        <h4>— Jason T., Creative Director</h4>
+      </div>
+      <div class="testimonial">
+        <i class="fas fa-quote-left"></i>
+        <p>"Eco-friendly options and fair pricing. My go-to print partner for large format banners."</p>
+        <h4>— Lina K.</h4>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-col">
+        <h4><i class="fas fa-print"></i> PrismaPrint</h4>
+        <p>Modern print lab with passion for precision. Blue & white aesthetics, sustainable quality.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <p><i class="fas fa-map-marker-alt"></i> 125 Blue Harbor St, Design District</p>
+        <p><i class="fas fa-phone-alt"></i> +1 (555) 782-3467</p>
+        <p><i class="fas fa-envelope"></i> hello@prismaprint.com</p>
+      </div>
+      <div class="footer-col">
+        <h4>Follow</h4>
+        <div class="social-icons">
+          <i class="fab fa-instagram"></i>
+          <i class="fab fa-twitter"></i>
+          <i class="fab fa-linkedin-in"></i>
+          <i class="fab fa-pinterest"></i>
+        </div>
+        <p style="margin-top: 12px;">#PrintWithPrisma</p>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>© 2025 PrismaPrint — where ideas meet premium print. All trademarks belong to their respective owners.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Interactive quote form with friendly message simulation (blue/white theme alert simulation)
+  const quoteForm = document.getElementById('printQuoteForm');
+  const feedback = document.getElementById('formFeedback');
+
+  quoteForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const name = document.getElementById('fullName').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const printType = document.getElementById('printType').value;
+    
+    if(!name || !email || !printType) {
+      feedback.innerHTML = '<span style="color:#d9534f;"><i class="fas fa-exclamation-circle"></i> Please fill all required fields.</span>';
+      return;
+    }
+    
+    // Simulate sending quote request
+    feedback.innerHTML = '<span style="color:#0a5c8e;"><i class="fas fa-spinner fa-pulse"></i> Sending your request...</span>';
+    
+    setTimeout(() => {
+      feedback.innerHTML = '<span style="color:#2e7d32;"><i class="fas fa-check-circle"></i> Thank you ' + name + '! A print specialist will contact you within 2 hours with your custom quote.</span>';
+      quoteForm.reset();
+      // clear success message after 5 secs? keep style nice
+      setTimeout(() => {
+        if(feedback.innerHTML.includes('Thank you')) {
+          feedback.innerHTML = '';
+        }
+      }, 6000);
+    }, 800);
+  });
+
+  // smooth anchor navigation for all internal links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const targetId = this.getAttribute('href');
+      if(targetId === "#") return;
+      const targetElem = document.querySelector(targetId);
+      if(targetElem) {
+        e.preventDefault();
+        targetElem.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+</body>
+</html>

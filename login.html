@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>WhopperCRM | Staff Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #f4f9ff 0%, #e8f5e9 100%); color: #0a2b3e; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 1.5rem; }
+    :root {
+      --primary-deep: #0a5c8e;
+      --primary-bright: #1e88e5;
+      --za-green: #007a4d;
+      --za-gold: #ffb612;
+      --pure-white: #ffffff;
+      --soft-white: #fefefe;
+      --gray-light: #f0f4f8;
+      --text-dark: #0a2b3e;
+      --text-muted: #2c4b66;
+      --border-light: #cbdde9;
+      --shadow-md: 0 12px 28px rgba(0, 122, 77, 0.12);
+    }
+
+    .login-card { background: var(--pure-white); padding: 3rem; border-radius: 32px; box-shadow: var(--shadow-md); width: 100%; max-width: 440px; text-align: center; border: 1px solid var(--border-light); }
+    .logo { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 2rem; }
+    .logo i { font-size: 2.5rem; color: var(--za-green); background: #e8f5e9; padding: 12px; border-radius: 20px; }
+    .logo h1 { font-size: 2rem; font-weight: 800; background: linear-gradient(135deg, var(--za-green), var(--primary-bright)); background-clip: text; -webkit-background-clip: text; color: transparent; }
+    
+    .login-header h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-dark); }
+    .login-header p { color: var(--text-muted); margin-bottom: 2rem; }
+
+    .form-group { margin-bottom: 1.5rem; text-align: left; }
+    .form-group label { display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--text-dark); }
+    .input-wrapper { position: relative; }
+    .input-wrapper i { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--text-muted); }
+    .form-group input { width: 100%; padding: 0.9rem 1rem 0.9rem 2.8rem; border-radius: 12px; border: 1px solid var(--border-light); outline: none; transition: 0.2s; font-family: inherit; background: var(--soft-white); }
+    .form-group input:focus { border-color: var(--za-green); box-shadow: 0 0 0 4px rgba(0, 122, 77, 0.1); }
+
+    .btn-login { background: var(--za-green); color: white; border: none; padding: 1rem; width: 100%; border-radius: 12px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: 0.2s; margin-bottom: 1.5rem; }
+    .btn-login:hover { background: #005a39; transform: translateY(-1px); box-shadow: 0 5px 15px rgba(0,122,77,0.3); }
+
+    .demo-info { background: #fff9c4; border: 1px dashed #fbc02d; padding: 1rem; border-radius: 12px; margin-bottom: 1.5rem; text-align: left; }
+    .demo-info p { font-size: 0.8rem; color: #856404; margin-bottom: 4px; font-weight: 600; }
+    .demo-info code { background: rgba(255,255,255,0.5); padding: 2px 6px; border-radius: 4px; color: #000; font-family: monospace; font-size: 0.85rem; }
+
+    .footer-links { margin-top: 2rem; font-size: 0.9rem; color: var(--text-muted); }
+    .footer-links a { color: var(--za-green); text-decoration: none; font-weight: 600; }
+  </style>
+</head>
+<body>
+
+<div class="login-card">
+  <div class="logo">
+    <i class="fas fa-hand-holding-heart"></i>
+    <h1>WhopperCRM</h1>
+  </div>
+  
+  <div class="login-header">
+    <h2>Lekker to see you!</h2>
+    <p>Sign in to manage your Mzansi hustle</p>
+  </div>
+
+  <form action="dashboard.html">
+    <div class="form-group">
+      <label>Work Email</label>
+      <div class="input-wrapper">
+        <i class="fas fa-envelope"></i>
+        <input type="email" placeholder="name@whoppercrm.co.za" required>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Password</label>
+      <div class="input-wrapper">
+        <i class="fas fa-lock"></i>
+        <input type="password" placeholder="••••••••" required>
+      </div>
+    </div>
+
+    <button type="submit" class="btn-login">Sign In (Heita!)</button>
+  </form>
+
+  <div class="demo-info">
+    <p><i class="fas fa-info-circle"></i> <strong>Staff Demo Login:</strong></p>
+    <p>Email: <code>lerato@whoppercrm.co.za</code></p>
+    <p>Password: <code>password123</code></p>
+  </div>
+
+  <div class="footer-links">
+    Don't have an account? <a href="#">Create a workspace</a><br>
+    <a href="customer-login.html" style="font-size: 0.8rem; margin-top: 1rem; display: inline-block;">Go to Customer Portal</a>
+  </div>
+</div>
+
+</body>
+</html>

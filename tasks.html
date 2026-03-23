@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>WhopperCRM | Local Tasks</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #f4f9ff; color: #0a2b3e; scroll-behavior: smooth; display: flex; min-height: 100vh; }
+    :root {
+      --primary-deep: #0a5c8e;
+      --primary-bright: #1e88e5;
+      --primary-light: #e3f2fd;
+      --za-green: #007a4d;
+      --pure-white: #ffffff;
+      --soft-white: #fefefe;
+      --gray-light: #f0f4f8;
+      --text-dark: #0a2b3e;
+      --text-muted: #2c4b66;
+      --border-light: #cbdde9;
+      --shadow-sm: 0 8px 20px rgba(0, 20, 50, 0.05);
+      --shadow-md: 0 12px 28px rgba(0, 30, 60, 0.08);
+    }
+
+    /* Sidebar Navigation (Reused) */
+    .sidebar { width: 260px; background: var(--pure-white); border-right: 1px solid var(--border-light); display: flex; flex-direction: column; position: sticky; top: 0; height: 100vh; z-index: 100; }
+    .sidebar-header { padding: 2rem; display: flex; align-items: center; gap: 12px; }
+    .sidebar-header i { font-size: 1.8rem; color: var(--za-green); background: var(--primary-light); padding: 8px; border-radius: 12px; }
+    .sidebar-header h1 { font-size: 1.4rem; font-weight: 700; background: linear-gradient(135deg, var(--za-green), var(--primary-bright)); background-clip: text; -webkit-background-clip: text; color: transparent; }
+    .sidebar-nav { flex: 1; padding: 0 1rem; }
+    .nav-item { display: flex; align-items: center; gap: 12px; padding: 0.8rem 1rem; text-decoration: none; color: var(--text-muted); font-weight: 500; border-radius: 12px; transition: 0.2s; margin-bottom: 0.5rem; }
+    .nav-item:hover, .nav-item.active { background: var(--primary-light); color: var(--za-green); }
+    .nav-item i { font-size: 1.1rem; }
+
+    /* Main Content */
+    .main-content { flex: 1; padding: 2rem; overflow-y: auto; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+    .header h2 { font-size: 1.8rem; font-weight: 700; }
+
+    .btn { padding: 0.8rem 1.5rem; border-radius: 12px; font-weight: 600; cursor: pointer; transition: 0.2s; border: none; display: flex; align-items: center; gap: 8px; text-decoration: none; font-size: 0.9rem; }
+    .btn-primary { background: var(--za-green); color: white; }
+    .btn-outline { background: white; border: 1px solid var(--border-light); color: var(--text-dark); }
+
+    /* Task Layout */
+    .task-container { display: grid; grid-template-columns: 240px 1fr; gap: 2rem; }
+    .task-filters { display: flex; flex-direction: column; gap: 0.5rem; }
+    .filter-item { display: flex; align-items: center; justify-content: space-between; padding: 0.8rem 1rem; border-radius: 12px; cursor: pointer; color: var(--text-muted); font-weight: 500; transition: 0.2s; }
+    .filter-item:hover, .filter-item.active { background: var(--primary-light); color: var(--za-green); }
+    .filter-item .count { font-size: 0.8rem; background: var(--pure-white); padding: 2px 8px; border-radius: 10px; }
+
+    .task-list { display: flex; flex-direction: column; gap: 1rem; }
+    .task-card { background: var(--pure-white); padding: 1.2rem; border-radius: 20px; box-shadow: var(--shadow-sm); border: 1px solid var(--border-light); display: flex; align-items: flex-start; gap: 1.2rem; transition: 0.2s; }
+    .task-card:hover { border-color: var(--za-green); box-shadow: var(--shadow-md); }
+    .task-checkbox { width: 22px; height: 22px; border: 2px solid var(--border-light); border-radius: 6px; flex-shrink: 0; cursor: pointer; margin-top: 2px; }
+    .task-content { flex: 1; }
+    .task-title { font-weight: 600; margin-bottom: 0.4rem; display: block; }
+    .task-meta { display: flex; gap: 1.5rem; font-size: 0.85rem; color: var(--text-muted); }
+    .task-meta span { display: flex; align-items: center; gap: 6px; }
+    .priority-badge { font-size: 0.75rem; font-weight: 600; padding: 2px 8px; border-radius: 6px; }
+    .priority-high { background: #ffebee; color: #c62828; }
+    .priority-medium { background: #fff3e0; color: #ef6c00; }
+    .priority-low { background: #e8f5e9; color: #2e7d32; }
+
+    @media (max-width: 1024px) { .task-container { grid-template-columns: 1fr; } .task-filters { display: flex; flex-direction: row; overflow-x: auto; padding-bottom: 1rem; } .filter-item { flex-shrink: 0; } }
+  </style>
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <i class="fas fa-hand-holding-heart"></i>
+    <h1>WhopperCRM</h1>
+  </div>
+  <nav class="sidebar-nav">
+    <a href="dashboard.html" class="nav-item"><i class="fas fa-chart-pie"></i> Dashboard</a>
+    <a href="customers.html" class="nav-item"><i class="fas fa-users"></i> Customers</a>
+    <a href="deals.html" class="nav-item"><i class="fas fa-handshake"></i> Deals</a>
+    <a href="tasks.html" class="nav-item active"><i class="fas fa-tasks"></i> Tasks</a>
+    <a href="contacts.html" class="nav-item"><i class="fas fa-address-book"></i> Contacts</a>
+    <a href="reports.html" class="nav-item"><i class="fas fa-chart-line"></i> Reports</a>
+    <div style="margin-top: 2rem; padding: 0 1rem; font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">Account</div>
+    <a href="profile.html" class="nav-item"><i class="fas fa-user-circle"></i> Profile</a>
+    <a href="settings.html" class="nav-item"><i class="fas fa-cog"></i> Settings</a>
+    <a href="login.html" class="nav-item"><i class="fas fa-sign-out-alt"></i> Logout</a>
+  </nav>
+</aside>
+
+<main class="main-content">
+  <header class="header">
+    <h2>Task List (South Africa)</h2>
+    <button class="btn btn-primary"><i class="fas fa-plus"></i> New Task</button>
+  </header>
+
+  <div class="task-container">
+    <div class="task-filters">
+      <div class="filter-item active">
+        <span><i class="fas fa-calendar-day" style="margin-right: 10px;"></i> Today</span>
+        <span class="count">5</span>
+      </div>
+      <div class="filter-item">
+        <span><i class="fas fa-calendar-alt" style="margin-right: 10px;"></i> Upcoming</span>
+        <span class="count">12</span>
+      </div>
+      <div class="filter-item">
+        <span><i class="fas fa-check-circle" style="margin-right: 10px;"></i> Completed</span>
+        <span class="count">48</span>
+      </div>
+      <div class="filter-item">
+        <span><i class="fas fa-star" style="margin-right: 10px;"></i> High Priority</span>
+        <span class="count">3</span>
+      </div>
+      <div style="margin-top: 1rem; padding: 0 1rem; font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">Regions</div>
+      <div class="filter-item">
+        <span><i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i> Gauteng</span>
+      </div>
+      <div class="filter-item">
+        <span><i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i> Western Cape</span>
+      </div>
+      <div class="filter-item">
+        <span><i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i> KwaZulu-Natal</span>
+      </div>
+    </div>
+
+    <div class="task-list">
+      <div class="task-card">
+        <div class="task-checkbox"></div>
+        <div class="task-content">
+          <span class="task-title">Follow up with Thabo regarding Shisa Nyama bulk order</span>
+          <div class="task-meta">
+            <span><i class="fas fa-clock"></i> 2:00 PM</span>
+            <span><i class="fas fa-building"></i> Jozi Hub Tech</span>
+            <span class="priority-badge priority-high">High</span>
+          </div>
+        </div>
+        <div class="action-icons">
+          <button class="action-btn" style="border:none; background:none; color: var(--text-muted); cursor:pointer;"><i class="fas fa-ellipsis-v"></i></button>
+        </div>
+      </div>
+
+      <div class="task-card">
+        <div class="task-checkbox"></div>
+        <div class="task-content">
+          <span class="task-title">Send monthly sales report to Durban branch</span>
+          <div class="task-meta">
+            <span><i class="fas fa-clock"></i> 4:30 PM</span>
+            <span><i class="fas fa-file-alt"></i> Internal</span>
+            <span class="priority-badge priority-medium">Medium</span>
+          </div>
+        </div>
+        <div class="action-icons">
+          <button class="action-btn" style="border:none; background:none; color: var(--text-muted); cursor:pointer;"><i class="fas fa-ellipsis-v"></i></button>
+        </div>
+      </div>
+
+      <div class="task-card">
+        <div class="task-checkbox"></div>
+        <div class="task-content">
+          <span class="task-title">Review Cape Town project timeline with Sipho</span>
+          <div class="task-meta">
+            <span><i class="fas fa-clock"></i> Tomorrow</span>
+            <span><i class="fas fa-building"></i> Cape Town Creatives</span>
+            <span class="priority-badge priority-medium">Medium</span>
+          </div>
+        </div>
+        <div class="action-icons">
+          <button class="action-btn" style="border:none; background:none; color: var(--text-muted); cursor:pointer;"><i class="fas fa-ellipsis-v"></i></button>
+        </div>
+      </div>
+
+      <div class="task-card">
+        <div class="task-checkbox"></div>
+        <div class="task-content">
+          <span class="task-title">Update BEE documentation for new clients</span>
+          <div class="task-meta">
+            <span><i class="fas fa-clock"></i> Next Week</span>
+            <span><i class="fas fa-book"></i> Compliance</span>
+            <span class="priority-badge priority-low">Low</span>
+          </div>
+        </div>
+        <div class="action-icons">
+          <button class="action-btn" style="border:none; background:none; color: var(--text-muted); cursor:pointer;"><i class="fas fa-ellipsis-v"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>WhopperCRM | Client Detail</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #f4f9ff; color: #0a2b3e; scroll-behavior: smooth; display: flex; min-height: 100vh; }
+    :root {
+      --primary-deep: #0a5c8e;
+      --primary-bright: #1e88e5;
+      --primary-light: #e3f2fd;
+      --za-green: #007a4d;
+      --pure-white: #ffffff;
+      --soft-white: #fefefe;
+      --gray-light: #f0f4f8;
+      --text-dark: #0a2b3e;
+      --text-muted: #2c4b66;
+      --border-light: #cbdde9;
+      --shadow-sm: 0 8px 20px rgba(0, 20, 50, 0.05);
+      --shadow-md: 0 12px 28px rgba(0, 30, 60, 0.08);
+    }
+
+    /* Sidebar Navigation (Reused) */
+    .sidebar { width: 260px; background: var(--pure-white); border-right: 1px solid var(--border-light); display: flex; flex-direction: column; position: sticky; top: 0; height: 100vh; z-index: 100; }
+    .sidebar-header { padding: 2rem; display: flex; align-items: center; gap: 12px; }
+    .sidebar-header i { font-size: 1.8rem; color: var(--za-green); background: var(--primary-light); padding: 8px; border-radius: 12px; }
+    .sidebar-header h1 { font-size: 1.4rem; font-weight: 700; background: linear-gradient(135deg, var(--za-green), var(--primary-bright)); background-clip: text; -webkit-background-clip: text; color: transparent; }
+    .sidebar-nav { flex: 1; padding: 0 1rem; }
+    .nav-item { display: flex; align-items: center; gap: 12px; padding: 0.8rem 1rem; text-decoration: none; color: var(--text-muted); font-weight: 500; border-radius: 12px; transition: 0.2s; margin-bottom: 0.5rem; }
+    .nav-item:hover, .nav-item.active { background: var(--primary-light); color: var(--za-green); }
+    .nav-item i { font-size: 1.1rem; }
+
+    /* Main Content */
+    .main-content { flex: 1; padding: 2rem; overflow-y: auto; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+    .header h2 { font-size: 1.8rem; font-weight: 700; }
+
+    .btn { padding: 0.8rem 1.5rem; border-radius: 12px; font-weight: 600; cursor: pointer; transition: 0.2s; border: none; display: flex; align-items: center; gap: 8px; text-decoration: none; font-size: 0.9rem; }
+    .btn-primary { background: var(--za-green); color: white; }
+    .btn-outline { background: white; border: 1px solid var(--border-light); color: var(--text-dark); }
+
+    /* Profile Header */
+    .profile-card { background: var(--pure-white); border-radius: 24px; padding: 2rem; box-shadow: var(--shadow-sm); border: 1px solid var(--border-light); display: flex; gap: 2rem; align-items: center; margin-bottom: 2rem; }
+    .profile-avatar { width: 100px; height: 100px; border-radius: 24px; object-fit: cover; }
+    .profile-info h3 { font-size: 1.8rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .profile-meta { display: flex; gap: 1.5rem; color: var(--text-muted); font-size: 0.95rem; }
+    .profile-meta span { display: flex; align-items: center; gap: 6px; }
+
+    /* Layout */
+    .detail-grid { display: grid; grid-template-columns: 1fr 300px; gap: 2rem; }
+    .card { background: var(--pure-white); border-radius: 24px; padding: 1.5rem; box-shadow: var(--shadow-sm); border: 1px solid var(--border-light); margin-bottom: 2rem; }
+    .card-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+
+    /* Tabs */
+    .tabs { display: flex; gap: 2rem; border-bottom: 1px solid var(--border-light); margin-bottom: 1.5rem; }
+    .tab { padding: 0.8rem 0; font-weight: 600; color: var(--text-muted); cursor: pointer; border-bottom: 2px solid transparent; transition: 0.2s; }
+    .tab.active { color: var(--za-green); border-color: var(--za-green); }
+
+    /* Timeline */
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before { content: ''; position: absolute; left: 7px; top: 0; bottom: 0; width: 2px; background: var(--gray-light); }
+    .timeline-item { position: relative; margin-bottom: 1.5rem; }
+    .timeline-dot { position: absolute; left: -2rem; top: 4px; width: 16px; height: 16px; border-radius: 50%; background: var(--za-green); border: 3px solid white; box-shadow: 0 0 0 2px var(--primary-light); }
+    .timeline-content h4 { font-size: 1rem; font-weight: 600; margin-bottom: 0.3rem; }
+    .timeline-content p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.4; }
+    .timeline-time { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.4rem; }
+
+    @media (max-width: 1024px) { .detail-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <i class="fas fa-hand-holding-heart"></i>
+    <h1>WhopperCRM</h1>
+  </div>
+  <nav class="sidebar-nav">
+    <a href="dashboard.html" class="nav-item"><i class="fas fa-chart-pie"></i> Dashboard</a>
+    <a href="customers.html" class="nav-item active"><i class="fas fa-users"></i> Customers</a>
+    <a href="deals.html" class="nav-item"><i class="fas fa-handshake"></i> Deals</a>
+    <a href="tasks.html" class="nav-item"><i class="fas fa-tasks"></i> Tasks</a>
+    <a href="contacts.html" class="nav-item"><i class="fas fa-address-book"></i> Contacts</a>
+    <a href="reports.html" class="nav-item"><i class="fas fa-chart-line"></i> Reports</a>
+    <div style="margin-top: 2rem; padding: 0 1rem; font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">Account</div>
+    <a href="profile.html" class="nav-item"><i class="fas fa-user-circle"></i> Profile</a>
+    <a href="settings.html" class="nav-item"><i class="fas fa-cog"></i> Settings</a>
+    <a href="login.html" class="nav-item"><i class="fas fa-sign-out-alt"></i> Logout</a>
+  </nav>
+</aside>
+
+<main class="main-content">
+  <header class="header">
+    <div style="display: flex; align-items: center; gap: 1rem;">
+      <a href="customers.html" class="action-btn" style="width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 10px; border: 1px solid var(--border-light); color: var(--text-muted); text-decoration: none;"><i class="fas fa-arrow-left"></i></a>
+      <h2>Client Details</h2>
+    </div>
+    <div style="display: flex; gap: 1rem;">
+      <button class="btn btn-outline"><i class="fab fa-whatsapp"></i> WhatsApp</button>
+      <button class="btn btn-primary"><i class="fas fa-edit"></i> Edit Client</button>
+    </div>
+  </header>
+
+  <div class="profile-card">
+    <img src="https://i.pravatar.cc/150?u=thabo" alt="Thabo Mbeki" class="profile-avatar">
+    <div class="profile-info">
+      <h3>Thabo Mbeki</h3>
+      <div class="profile-meta">
+        <span><i class="fas fa-building"></i> Jozi Hub Tech</span>
+        <span><i class="fas fa-envelope"></i> thabo@jozihub.co.za</span>
+        <span><i class="fas fa-phone"></i> +27 (011) 123-4567</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="detail-grid">
+    <div class="left-col">
+      <div class="card">
+        <div class="tabs">
+          <div class="tab active">Activity Feed</div>
+          <div class="tab">Local Deals</div>
+          <div class="tab">Notes</div>
+          <div class="tab">Files</div>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h4>Invoice Paid</h4>
+              <p>Thabo settled the invoice for "Braai Equipment Supply" via EFT.</p>
+              <div class="timeline-time">Today, 10:45 AM</div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot" style="background: #ef6c00;"></div>
+            <div class="timeline-content">
+              <h4>WhatsApp Follow-up</h4>
+              <p>Discussed bulk order for the upcoming festive season.</p>
+              <div class="timeline-time">Yesterday, 2:30 PM</div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot" style="background: #2e7d32;"></div>
+            <div class="timeline-content">
+              <h4>Deal Closed</h4>
+              <p>Successfully closed the "Office Refresh" project worth R 15,000.</p>
+              <div class="timeline-time">Mar 20, 2026</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="right-col">
+      <div class="card">
+        <h3 class="card-title">Client Info</h3>
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+          <div>
+            <p style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px;">Status</p>
+            <p style="font-weight: 600;">Active Client</p>
+          </div>
+          <div>
+            <p style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px;">Province</p>
+            <p style="font-weight: 600;">Gauteng</p>
+          </div>
+          <div>
+            <p style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px;">Account Manager</p>
+            <p style="font-weight: 600;">Lerato Nkosi</p>
+          </div>
+          <div style="padding-top: 1rem; border-top: 1px solid var(--gray-light);">
+            <p style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px;">Address</p>
+            <p style="font-weight: 500; font-size: 0.9rem;">123 Vilakazi St, Orlando West, Soweto, 1804</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="card-title">Quick Actions</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem;">
+          <button class="btn btn-outline" style="justify-content: center;"><i class="fas fa-plus"></i> Task</button>
+          <button class="btn btn-outline" style="justify-content: center;"><i class="fas fa-calendar"></i> Meet</button>
+          <button class="btn btn-outline" style="justify-content: center;"><i class="fas fa-phone"></i> Call</button>
+          <button class="btn btn-outline" style="justify-content: center;"><i class="fas fa-sticky-note"></i> Note</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+</body>
+</html>

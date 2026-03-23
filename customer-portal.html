@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>WhopperCRM | Client Portal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #f0f4f8; color: #0a2b3e; scroll-behavior: smooth; }
+    :root {
+      --primary-deep: #283593;
+      --primary-bright: #3f51b5;
+      --primary-light: #e8eaf6;
+      --za-green: #007a4d;
+      --za-gold: #ffb612;
+      --pure-white: #ffffff;
+      --soft-white: #fefefe;
+      --gray-light: #f5f5f5;
+      --text-dark: #1a237e;
+      --text-muted: #5c6bc0;
+      --border-light: #c5cae9;
+      --shadow-sm: 0 8px 20px rgba(26, 35, 126, 0.05);
+      --shadow-md: 0 12px 28px rgba(26, 35, 126, 0.08);
+    }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+
+    /* Header */
+    .header { background: var(--pure-white); padding: 1rem 0; box-shadow: var(--shadow-sm); border-bottom: 1px solid var(--border-light); position: sticky; top: 0; z-index: 100; }
+    .header-flex { display: flex; justify-content: space-between; align-items: center; }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo i { font-size: 1.8rem; color: var(--za-green); }
+    .logo h1 { font-size: 1.4rem; font-weight: 800; color: var(--text-dark); }
+    
+    .user-nav { display: flex; align-items: center; gap: 1.5rem; }
+    .user-avatar { width: 36px; height: 36px; border-radius: 50%; border: 2px solid var(--primary-light); }
+
+    /* Main Content */
+    .main { padding: 3rem 0; }
+    .welcome-msg { margin-bottom: 2rem; }
+    .welcome-msg h2 { font-size: 1.8rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .welcome-msg p { color: var(--text-muted); }
+
+    .portal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+    .card { background: var(--pure-white); border-radius: 24px; padding: 2rem; box-shadow: var(--shadow-sm); border: 1px solid var(--border-light); transition: 0.3s; }
+    .card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: var(--za-green); }
+    .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+    .card-header h3 { font-size: 1.2rem; font-weight: 700; }
+    .card-icon { width: 48px; height: 48px; background: #e8f5e9; color: var(--za-green); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; }
+
+    .order-item { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-bottom: 1px solid var(--gray-light); }
+    .order-item:last-child { border-bottom: none; }
+    .order-info h4 { font-size: 0.95rem; font-weight: 600; }
+    .order-info p { font-size: 0.8rem; color: var(--text-muted); }
+    .order-status { font-size: 0.75rem; font-weight: 700; padding: 4px 12px; border-radius: 20px; }
+    .status-shipped { background: #e8f5e9; color: #2e7d32; }
+    .status-pending { background: #fff3e0; color: #ef6c00; }
+
+    .btn { padding: 0.8rem 1.5rem; border-radius: 12px; font-weight: 600; cursor: pointer; transition: 0.2s; border: none; font-size: 0.9rem; text-decoration: none; display: inline-block; text-align: center; }
+    .btn-primary { background: var(--za-green); color: white; }
+    .btn-outline { background: transparent; border: 1px solid var(--za-green); color: var(--za-green); }
+
+    @media (max-width: 768px) { .portal-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <div class="container header-flex">
+    <a href="#" class="logo">
+      <i class="fas fa-hand-holding-heart"></i>
+      <h1>WhopperCRM</h1>
+    </a>
+    <div class="user-nav">
+      <span style="font-weight: 600; font-size: 0.9rem;">Thabo Mbeki</span>
+      <img src="https://i.pravatar.cc/150?u=thabo" alt="Thabo" class="user-avatar">
+      <a href="customer-login.html" style="color: var(--text-muted); text-decoration: none; font-size: 0.85rem;"><i class="fas fa-sign-out-alt"></i></a>
+    </div>
+  </div>
+</header>
+
+<main class="main container">
+  <div class="welcome-msg">
+    <h2>Heita, Thabo!</h2>
+    <p>Track your Mzansi orders and get support from our team.</p>
+  </div>
+
+  <div class="portal-grid">
+    <div class="card">
+      <div class="card-header">
+        <h3>Local Orders</h3>
+        <div class="card-icon"><i class="fas fa-truck"></i></div>
+      </div>
+      <div class="order-list">
+        <div class="order-item">
+          <div class="order-info">
+            <h4>#ORD-ZA-78234</h4>
+            <p>12x Custom Braai Kits • R 12,000</p>
+          </div>
+          <span class="order-status status-pending">In Production</span>
+        </div>
+        <div class="order-item">
+          <div class="order-info">
+            <h4>#ORD-ZA-78190</h4>
+            <p>50x Branded Uniforms • R 29,950</p>
+          </div>
+          <span class="order-status status-shipped">Shipped</span>
+        </div>
+      </div>
+      <a href="#" class="btn btn-outline" style="width: 100%; margin-top: 1.5rem;">View All Orders</a>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <h3>Support Tickets</h3>
+        <div class="card-icon"><i class="fab fa-whatsapp"></i></div>
+      </div>
+      <div class="order-list">
+        <div class="order-item">
+          <div class="order-info">
+            <h4>Delivery to Soweto</h4>
+            <p>Ticket #ZA-9021 • Updated 2h ago</p>
+          </div>
+          <span class="order-status status-pending">Open</span>
+        </div>
+        <div class="order-item">
+          <div class="order-info">
+            <h4>Quote: Bulk Order</h4>
+            <p>Ticket #ZA-8945 • Resolved</p>
+          </div>
+          <span class="order-status status-shipped">Closed</span>
+        </div>
+      </div>
+      <a href="#" class="btn btn-outline" style="width: 100%; margin-top: 1.5rem;">New WhatsApp Ticket</a>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <h3>Billing (Rands)</h3>
+        <div class="card-icon"><i class="fas fa-money-bill-wave"></i></div>
+      </div>
+      <div style="margin-bottom: 1.5rem;">
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">Outstanding Balance</p>
+        <p style="font-size: 2rem; font-weight: 800; color: var(--text-dark);">R 12,000.00</p>
+      </div>
+      <a href="#" class="btn btn-primary" style="width: 100%;">Pay via EFT / Card</a>
+      <p style="text-align: center; font-size: 0.8rem; color: var(--text-muted); margin-top: 1rem;">Next billing date: April 1, 2026</p>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top: 2rem;">
+    <h3 style="margin-bottom: 1.5rem;">Account Information (ZA)</h3>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem;">
+      <div>
+        <p style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px;">Company</p>
+        <p style="font-weight: 600;">Jozi Hub Tech</p>
+      </div>
+      <div>
+        <p style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px;">Province</p>
+        <p style="font-weight: 600;">Gauteng</p>
+      </div>
+      <div>
+        <p style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px;">Email</p>
+        <p style="font-weight: 600;">thabo@jozihub.co.za</p>
+      </div>
+      <div>
+        <p style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px;">BEE Level</p>
+        <p style="font-weight: 600;">Level 1 Contributor</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer style="padding: 3rem 0; background: var(--za-green); color: white; text-align: center; margin-top: 3rem;">
+  <div class="container">
+    <p>© 2026 WhopperCRM South Africa. Local is Lekker. 🇿🇦</p>
+  </div>
+</footer>
+
+</body>
+</html>

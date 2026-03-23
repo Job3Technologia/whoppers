@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>WhopperCRM | Proudly South African Business Management</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #f4f9ff; color: #0a2b3e; scroll-behavior: smooth; }
+    :root {
+      --primary-deep: #0a5c8e;
+      --primary-bright: #1e88e5;
+      --primary-light: #e3f2fd;
+      --accent-glow: #3ea6ff;
+      --pure-white: #ffffff;
+      --soft-white: #fefefe;
+      --gray-light: #f0f4f8;
+      --text-dark: #0a2b3e;
+      --text-muted: #2c4b66;
+      --border-light: #cbdde9;
+      --shadow-sm: 0 8px 20px rgba(0, 20, 50, 0.05);
+      --shadow-md: 0 12px 28px rgba(0, 30, 60, 0.08);
+      --za-gold: #ffb612;
+      --za-green: #007a4d;
+    }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+
+    /* Navbar */
+    .navbar { background: var(--pure-white); padding: 1rem 0; box-shadow: var(--shadow-sm); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--border-light); }
+    .nav-flex { display: flex; justify-content: space-between; align-items: center; }
+    .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .logo i { font-size: 2rem; color: var(--za-green); background: var(--primary-light); padding: 8px; border-radius: 12px; }
+    .logo h1 { font-size: 1.6rem; font-weight: 800; background: linear-gradient(135deg, var(--za-green), var(--primary-bright)); background-clip: text; -webkit-background-clip: text; color: transparent; }
+    
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--text-dark); font-weight: 600; transition: 0.2s; font-size: 0.95rem; }
+    .nav-links a:hover { color: var(--za-green); }
+
+    .btn { padding: 0.8rem 1.8rem; border-radius: 40px; font-weight: 700; cursor: pointer; transition: 0.2s; border: none; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; }
+    .btn-primary { background: var(--za-green); color: white; box-shadow: 0 5px 15px rgba(0,122,77,0.3); }
+    .btn-primary:hover { background: #005a39; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,122,77,0.4); }
+    .btn-outline { background: transparent; border: 2px solid var(--za-green); color: var(--za-green); }
+    .btn-outline:hover { background: var(--za-green); color: white; }
+
+    /* Hero Section */
+    .hero { padding: 6rem 0; text-align: center; background: radial-gradient(circle at top right, #e8f5e9 0%, transparent 40%), radial-gradient(circle at bottom left, #fff9c4 0%, transparent 40%); }
+    .hero h2 { font-size: 3.5rem; font-weight: 900; line-height: 1.1; margin-bottom: 1.5rem; color: var(--text-dark); }
+    .hero h2 span { color: var(--za-green); }
+    .hero p { font-size: 1.25rem; color: var(--text-muted); max-width: 700px; margin: 0 auto 2.5rem; line-height: 1.6; }
+
+    /* Status Bar */
+    .status-bar { display: flex; gap: 1rem; justify-content: center; margin-bottom: 3rem; flex-wrap: wrap; }
+    .status-item { background: var(--pure-white); padding: 10px 20px; border-radius: 20px; box-shadow: var(--shadow-sm); display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 0.9rem; border: 1px solid var(--border-light); }
+    .status-item i { color: var(--za-green); }
+
+    /* Features */
+    .features { padding: 4rem 0; background: var(--pure-white); }
+    .section-title { text-align: center; margin-bottom: 4rem; }
+    .section-title h3 { font-size: 2.2rem; font-weight: 800; margin-bottom: 1rem; }
+    .section-title p { color: var(--text-muted); }
+
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2.5rem; }
+    .feature-card { padding: 2.5rem; border-radius: 32px; background: var(--gray-light); border: 1px solid var(--border-light); transition: 0.3s; text-align: center; }
+    .feature-card:hover { transform: translateY(-10px); background: var(--pure-white); border-color: var(--za-green); box-shadow: var(--shadow-md); }
+    .feature-icon { font-size: 2.5rem; color: var(--za-green); background: var(--pure-white); width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; border-radius: 24px; margin: 0 auto 1.5rem; box-shadow: var(--shadow-sm); }
+    .feature-card h4 { font-size: 1.3rem; font-weight: 700; margin-bottom: 1rem; }
+    .feature-card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.5; }
+
+    /* Footer */
+    footer { padding: 4rem 0; background: #0a2b3e; color: #cbdde9; text-align: center; }
+    .za-badge { display: inline-flex; align-items: center; gap: 10px; background: #000; color: #fff; padding: 8px 16px; border-radius: 12px; margin-bottom: 2rem; font-weight: 800; font-size: 0.8rem; }
+    .footer-logo { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 1.5rem; text-decoration: none; }
+    .footer-logo i { font-size: 1.8rem; color: var(--za-green); }
+    .footer-logo h4 { color: white; font-size: 1.5rem; font-weight: 800; }
+    .footer-links { display: flex; justify-content: center; gap: 2rem; list-style: none; margin-bottom: 2rem; }
+    .footer-links a { color: #cbdde9; text-decoration: none; font-size: 0.9rem; }
+    .footer-links a:hover { color: white; }
+    .copyright { font-size: 0.8rem; opacity: 0.6; }
+
+    @media (max-width: 768px) {
+      .hero h2 { font-size: 2.5rem; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container nav-flex">
+    <a href="index.html" class="logo">
+      <i class="fas fa-hand-holding-heart"></i>
+      <h1>WhopperCRM</h1>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+    <div style="display: flex; gap: 1rem;">
+      <a href="login.html" class="btn btn-outline" style="padding: 0.6rem 1.4rem;">Staff Login</a>
+      <a href="customer-login.html" class="btn btn-primary" style="padding: 0.6rem 1.4rem;">Customer Portal</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <section class="hero">
+    <div class="container">
+      <h2>Local Business. <span>Global Standards.</span></h2>
+      <p>Manage your Mzansi hustle with ease. From Jozi to Cape Town, we help South African businesses close deals, track leads, and grow faster. Sharp Sharp! 🇿🇦</p>
+      
+      <div class="status-bar">
+        <div class="status-item"><i class="fas fa-bolt"></i> Load-Shedding: Stage 0</div>
+        <div class="status-item"><i class="fas fa-truck"></i> Shipping: Nationwide (SA)</div>
+        <div class="status-item"><i class="fas fa-map-marker-alt"></i> HQ: Durban, KZN</div>
+      </div>
+
+      <div style="display: flex; justify-content: center; gap: 1.5rem;">
+        <a href="login.html" class="btn btn-primary"><i class="fas fa-rocket"></i> Get Started (It's Lekker)</a>
+        <a href="#demo" class="btn btn-outline"><i class="fas fa-play"></i> Watch Demo</a>
+      </div>
+
+      <div style="margin-top: 4rem; opacity: 0.8;">
+        <p style="font-size: 0.9rem; margin-bottom: 1.5rem;">TRUSTED BY MZANSI'S FINEST TEAMS</p>
+        <div style="display: flex; justify-content: center; gap: 3rem; font-size: 1.5rem; color: var(--text-muted); flex-wrap: wrap;">
+          <i class="fab fa-google"></i>
+          <i class="fab fa-microsoft"></i>
+          <i class="fab fa-whatsapp"></i>
+          <i class="fab fa-stripe"></i>
+          <i class="fas fa-shield-alt"></i>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="features" class="features">
+    <div class="container">
+      <div class="section-title">
+        <h3>Everything you need to grow</h3>
+        <p>Built for the unique needs of South African entrepreneurs and teams.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+          <h4>Smart Analytics</h4>
+          <p>Real-time insights into your revenue in Rands. Track your growth across all 9 provinces.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-users"></i></div>
+          <h4>Lead Management</h4>
+          <p>Track every interaction with your clients from Soweto to Sandton. Never miss a follow-up.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-tasks"></i></div>
+          <h4>Task Automation</h4>
+          <p>Automate repetitive admin and focus on building relationships. Shosholoza your workflow.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+          <h4>Enterprise Security</h4>
+          <p>Your data is protected with high-level encryption. Safe and secure for local businesses.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-mobile-alt"></i></div>
+          <h4>Mobile Ready</h4>
+          <p>Manage your business on the go. Works perfectly on all mobile networks across Mzansi.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fab fa-whatsapp"></i></div>
+          <h4>WhatsApp CRM</h4>
+          <p>Connect with customers where they are. Full WhatsApp integration for faster communication.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="za-badge">🇿🇦 PROUDLY SOUTH AFRICAN</div>
+    <br>
+    <a href="index.html" class="footer-logo">
+      <i class="fas fa-hand-holding-heart"></i>
+      <h4>WhopperCRM</h4>
+    </a>
+    <ul class="footer-links">
+      <li><a href="#">Privacy Policy</a></li>
+      <li><a href="#">Terms of Service</a></li>
+      <li><a href="#">Contact Us</a></li>
+      <li><a href="#">Support</a></li>
+    </ul>
+    <div class="copyright">
+      <p>© 2026 WhopperCRM South Africa. All rights reserved. Heita! 🇿🇦</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
